@@ -28,6 +28,20 @@ public:
 		current++;
 	}
 
+	void insert(int index, T value) {
+		// если число элементов = capacity, добавляем в конец 0, расширяем в 2 раза
+		if (current == capacity) {
+			push_back(0);
+		}
+		// смещаем элементы вправо
+		for (int i = index; i < current + 1; i++) {
+			arr[i + 1] = arr[i];
+		}
+		// в освобожденное место вставляем нужное значение
+		arr[index] = value;
+
+	}
+
 	void pop_back() {
 		arr[--current] = { 0 };
 	}
@@ -59,12 +73,13 @@ int main() {
 	vector.push_back(10);
 	vector.push_back(10);
 	vector.push_back(10);
-	vector.push_back(10);
 	vector.print();
+
 	std::cout << std::endl << vector.getCapacity() << ' ' << vector.getSize();
-	vector.pop_back();
+	vector.insert(1, 20);
 	std::cout << std::endl << vector.getCapacity() << ' ' << vector.getSize() << "\n\n";
 
+	vector.print();
 
 	vectorClass <std::string> strings;
 	strings.push_back("hello");
@@ -79,4 +94,24 @@ int main() {
 
 	std::cout << strings.get(1) << "\n";
 	std::cout << vector.get(3) << "\n";
+
 }
+
+
+/*
+	
+
+	vectorClass <std::string> strings;
+	strings.push_back("hello");
+	strings.push_back("hey");
+	strings.push_back("privet");
+
+	strings.print();
+	std::cout << std::endl << strings.getCapacity() << ' ' << strings.getSize();
+	strings.pop_back();
+	std::cout << std::endl << strings.getCapacity() << ' ' << strings.getSize() << std::endl;
+	strings.print();
+
+	std::cout << strings.get(1) << "\n";
+	std::cout << vector.get(3) << "\n";
+*/
